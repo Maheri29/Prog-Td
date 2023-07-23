@@ -29,9 +29,24 @@ public class EmployeeService {
 
     public Employee addEmployee(Employee employeeModel) {
         Employee employee = new Employee();
+        // Copie des attributs de l'employé depuis le modèle
         employee.setDateOfBirth(employeeModel.getDateOfBirth());
         employee.setFirstName(employeeModel.getFirstName());
         employee.setLastName(employeeModel.getLastName());
+        employee.setSex(employeeModel.getSex());
+        employee.setPhones(employeeModel.getPhones());
+        employee.setAddress(employeeModel.getAddress());
+        employee.setPersonalEmail(employeeModel.getPersonalEmail());
+        employee.setProfessionalEmail(employeeModel.getProfessionalEmail());
+        employee.setCinNumber(employeeModel.getCinNumber());
+        employee.setCinDeliveryDate(employeeModel.getCinDeliveryDate());
+        employee.setCinDeliveryPlace(employeeModel.getCinDeliveryPlace());
+        employee.setJobTitle(employeeModel.getJobTitle());
+        employee.setNumberOfChildren(employeeModel.getNumberOfChildren());
+        employee.setHireDate(employeeModel.getHireDate());
+        employee.setDepartureDate(employeeModel.getDepartureDate());
+        employee.setSocioProfessionalCategory(employeeModel.getSocioProfessionalCategory());
+        employee.setCnapsNumber(employeeModel.getCnapsNumber());
 
         MultipartFile photo = employeeModel.getPhoto();
         if (photo != null && !photo.isEmpty()) {

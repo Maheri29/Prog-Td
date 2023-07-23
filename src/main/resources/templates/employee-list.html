@@ -14,6 +14,20 @@
             <th>Prénom</th>
             <th>Nom</th>
             <th>Date de naissance</th>
+            <th>Sexe</th>
+            <th>Téléphones</th>
+            <th>Adresse</th>
+            <th>Email perso</th>
+            <th>Email pro</th>
+            <th>Numéro CIN</th>
+            <th>Date de délivrance du CIN</th>
+            <th>Lieu de délivrance du CIN</th>
+            <th>Fonction</th>
+            <th>Enfants à charge</th>
+            <th>Date d'embauche</th>
+            <th>Date de départ</th>
+            <th>Catégorie socio-professionnelle</th>
+            <th>Numéro CNAPS</th>
             <th></th> <!-- Colonne pour le lien vers la fiche employé -->
         </tr>
         </thead>
@@ -23,6 +37,20 @@
             <td th:text="${employee.firstName}"></td>
             <td th:text="${employee.lastName}"></td>
             <td th:text="${employee.dateOfBirth}"></td>
+            <td th:text="${employee.sex}"></td>
+            <td th:text="${employee.phones}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.personalEmail}"></td>
+            <td th:text="${employee.professionalEmail}"></td>
+            <td th:text="${employee.cinNumber}"></td>
+            <td th:text="${employee.cinDeliveryDate}"></td>
+            <td th:text="${employee.cinDeliveryPlace}"></td>
+            <td th:text="${employee.jobTitle}"></td>
+            <td th:text="${employee.numberOfChildren}"></td>
+            <td th:text="${employee.hireDate}"></td>
+            <td th:text="${employee.departureDate}"></td>
+            <td th:text="${employee.socioProfessionalCategory}"></td>
+            <td th:text="${employee.cnapsNumber}"></td>
             <td>
                 <a class="btn btn-primary" th:href="@{/employee/{id}(id=${employee.id})}">Voir la fiche</a>
             </td>

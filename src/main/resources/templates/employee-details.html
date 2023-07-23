@@ -21,7 +21,7 @@
       <p class="card-text"><strong>Date de naissance :</strong> <span th:text="${employee.dateOfBirth}"></span></p>
       <div>
         <strong>Photo d'identité :</strong>
-        <img class="employee-image" th:src="${'data:image/png;base64,' + employee.image}" alt="Photo de l'employé">
+        <img src="data:image/png;base64," th:attrappend="src=${employee.image}" alt="Photo de l'employé">
       </div>
     </div>
   </div>

@@ -11,14 +11,24 @@
       display: block; /* Assurez-vous que l'image est affichée en tant que bloc */
       margin: 0 auto; /* Centrez l'image horizontalement */
     }
+    .card {
+      margin-top: 20px;
+      max-width: 500px; /* Définir la largeur maximale de la carte */
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+      border: 1px solid #ccc; /* Ajouter une bordure à la carte */
+    }
+    .card-text {
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
-<h1>Détails de l'employé</h1>
+<h1 class="text-center">Détails de l'employé</h1>
 <div class="container">
   <div class="card">
-    <div>
-      <strong>Photo d'identité :</strong>
+    <div class="text-center">
       <img class="employee-image" src="data:image/png;base64," th:attrappend="src=${employee.image}" alt="Photo de l'employé">
     </div>
     <div class="card-body">

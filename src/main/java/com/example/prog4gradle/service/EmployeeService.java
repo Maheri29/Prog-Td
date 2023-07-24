@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
 
@@ -60,6 +61,11 @@ public class EmployeeService {
         }
 
         return employeeRepository.save(employee);
+    }
+    public List<Employee> getFilteredEmployees(String firstName, String lastName, String sex, String jobTitle,
+                                               LocalDate hireDateFrom, LocalDate hireDateTo,
+                                               LocalDate departureDateFrom, LocalDate departureDateTo) {
+        return employeeRepository.findByFilters(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo);
     }
 
     // Autres méthodes pour effectuer des opérations sur les employés en utilisant le repository

@@ -18,10 +18,18 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/employees")
-    public String getEmployees(Model model) {
-        List<Employee> employeeList = employeeService.getAllEmployees();
+    public String getEmployees(@RequestParam(value = "firstName", required = false) String firstName,
+                               @RequestParam(value = "lastName", required = false) String lastName,
+                               @RequestParam(value = "sex", required = false) String sex,
+                               @RequestParam(value = "jobTitle", required = false) String jobTitle,
+                               @RequestParam(value = "hireDateFrom", required = false) LocalDate hireDateFrom,
+                               @RequestParam(value = "hireDateTo", required = false) LocalDate hireDateTo,
+                               @RequestParam(value = "departureDateFrom", required = false) LocalDate departureDateFrom,
+                               @RequestParam(value = "departureDateTo", required = false) LocalDate departureDateTo,
+                               Model model) {
+        List<Employee> employeeList = employeeService.getFilteredEmployees(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo);
         model.addAttribute("employees", employeeList);
-        return "employee-list"; // Nom du template Thymeleaf pour afficher la liste d'employés
+        return "employee-list";
     }
 
     @GetMapping("/add-employee")

@@ -65,6 +65,13 @@ public class EmployeeService {
     public List<Employee> getFilteredEmployees(String firstName, String lastName, String sex, String jobTitle,
                                                LocalDate hireDateFrom, LocalDate hireDateTo,
                                                LocalDate departureDateFrom, LocalDate departureDateTo) {
+
+        // Vérifier les paramètres et définir leur valeur à null s'ils sont vides
+        firstName = (firstName != null && !firstName.isEmpty()) ? firstName : null;
+        lastName = (lastName != null && !lastName.isEmpty()) ? lastName : null;
+        sex = (sex != null && !sex.isEmpty()) ? sex : null;
+        jobTitle = (jobTitle != null && !jobTitle.isEmpty()) ? jobTitle : null;
+
         return employeeRepository.findByFilters(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo);
     }
 

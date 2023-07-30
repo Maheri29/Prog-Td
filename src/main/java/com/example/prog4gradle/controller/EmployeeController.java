@@ -26,8 +26,10 @@ public class EmployeeController {
                                @RequestParam(value = "hireDateTo", required = false) LocalDate hireDateTo,
                                @RequestParam(value = "departureDateFrom", required = false) LocalDate departureDateFrom,
                                @RequestParam(value = "departureDateTo", required = false) LocalDate departureDateTo,
+                               @RequestParam(value = "sortField", required = false) String sortField,
+                               @RequestParam(value = "sortOrder", required = false) String sortOrder,
                                Model model) {
-        List<Employee> employeeList = employeeService.getFilteredEmployees(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo);
+        List<Employee> employeeList = employeeService.getFilteredEmployees(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo, sortField, sortOrder);
         model.addAttribute("employees", employeeList);
         return "employee-list";
     }

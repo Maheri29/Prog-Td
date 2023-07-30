@@ -61,10 +61,10 @@
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
             <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Date de naissance</th>
-                <th>Sexe</th>
+                <th><a th:href="@{/employees(sortField='firstName', sortOrder=(sortField eq 'firstName' and sortOrder eq 'asc') ? 'desc' : 'asc')}">Prénom</a></th>
+                <th><a th:href="@{/employees(sortField='lastName', sortOrder=(sortField eq 'lastName' and sortOrder eq 'asc') ? 'desc' : 'asc')}">Nom</a></th>
+                <th><a th:href="@{/employees(sortField='dateOfBirth', sortOrder=(sortField eq 'dateOfBirth' and sortOrder eq 'asc') ? 'desc' : 'asc')}">Date de naissance</a></th>
+                <th><a th:href="@{/employees(sortField='sex', sortOrder=(sortField eq 'sex' and sortOrder eq 'asc') ? 'desc' : 'asc')}">Sexe</a></th>
                 <th>Téléphones</th>
                 <th>Adresse</th>
                 <th>Email perso</th>

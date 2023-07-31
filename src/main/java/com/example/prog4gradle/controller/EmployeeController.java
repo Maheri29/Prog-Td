@@ -2,11 +2,15 @@ package com.example.prog4gradle.controller;
 
 import com.example.prog4gradle.model.Employee;
 import com.example.prog4gradle.service.EmployeeService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -51,6 +55,58 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
         return "employee-details";
+    }
+
+    @GetMapping("/export-employees")
+    public void exportEmployeesCSV(@RequestParam(value = "firstName", required = false) String firstName,
+                                   @RequestParam(value = "lastName", required = false) String lastName,
+                                   @RequestParam(value = "sex", required = false) String sex,
+                                   @RequestParam(value = "jobTitle", required = false) String jobTitle,
+                                   @RequestParam(value = "hireDateFrom", required = false) LocalDate hireDateFrom,
+                                   @RequestParam(value = "hireDateTo", required = false) LocalDate hireDateTo,
+                                   @RequestParam(value = "departureDateFrom", required = false) LocalDate departureDateFrom,
+                                   @RequestParam(value = "departureDateTo", required = false) LocalDate departureDateTo,
+                                   @RequestParam(value = "sortField", required = false) String sortField,
+                                   @RequestParam(value = "sortOrder", required = false) String sortOrder,
+                                   HttpServletResponse response) throws IOException {
+        List<Employee> employeeList = employeeService.getFilteredEmployees(firstName, lastName, sex, jobTitle, hireDateFrom, hireDateTo, departureDateFrom, departureDateTo, sortField, sortOrder);
+
+        // Set the content type and header for CSV file download
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; filename=\"employees.csv\"");
+
+        // Create a CSV writer using the response's output stream
+        CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), CSVFormat.DEFAULT
+                .withHeader("First Name", "Last Name", "Date of Birth", "Sex", "Phones", "Address", "Personal Email",
+                        "Professional Email", "CIN Number", "CIN Delivery Date", "CIN Delivery Place", "Job Title",
+                        "Number of Children", "Hire Date", "Departure Date", "Socio-Professional Category", "CNAPS Number"));
+
+        // Write employee data to CSV
+        for (Employee employee : employeeList) {
+            csvPrinter.printRecord(
+                    employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getDateOfBirth(),
+                    employee.getSex(),
+                    employee.getPhones(),
+                    employee.getAddress(),
+                    employee.getPersonalEmail(),
+                    employee.getProfessionalEmail(),
+                    employee.getCinNumber(),
+                    employee.getCinDeliveryDate(),
+                    employee.getCinDeliveryPlace(),
+                    employee.getJobTitle(),
+                    employee.getNumberOfChildren(),
+                    employee.getHireDate(),
+                    employee.getDepartureDate(),
+                    employee.getSocioProfessionalCategory(),
+                    employee.getCnapsNumber()
+            );
+        }
+
+        // Flush and close the CSV printer
+        csvPrinter.flush();
+        csvPrinter.close();
     }
 
     // Autres méthodes du contrôleur pour d'autres opérations liées aux employés
